@@ -4,7 +4,7 @@ from data import Data
 
 class Cluster:
     def __init__(self, c_id, samples):
-        self.c_id = c_id         #cluster's id
+        self.c_id = c_id        #cluster's id
         self.samples = samples  #list of samples
 
     def merge(self, other):

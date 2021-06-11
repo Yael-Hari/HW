@@ -20,16 +20,3 @@ class Data:
         return sample_list
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-

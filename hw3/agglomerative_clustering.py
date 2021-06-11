@@ -46,7 +46,7 @@ class AgglomerativeClustering:
     #def compute_rand_index(self):
 
     def run(self, number_of_clusters):
-        for i in range (0,2):
+        for i in range(0, 2):
              meth = method[i]()
              dis = meth.compute(self.clusters[0], self.clusters[1])
              while len(self.clusters) > number_of_clusters:
@@ -60,7 +60,8 @@ class AgglomerativeClustering:
                                 most_close[0] = cluster
                                 most_close[1] = other
                 most_close[0].merge(most_close[1])
-        print ('single link')
+        print('single link')
+
         for i in self.clusters:
             print('Cluster ', i.c_id,': ',i.samples.s_id)
 
