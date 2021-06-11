@@ -29,3 +29,6 @@ class CompleteLink(Link):
                 distances_matrix[i][j] = sample_i.compute_euclidean_distance(sample_j)
 
         return max([max(x) for x in distances_matrix])
+
+
+method = [SingleLink, CompleteLink]

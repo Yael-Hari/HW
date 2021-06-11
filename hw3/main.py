@@ -1,14 +1,16 @@
 import sys
 from data import Data
 from sample import Sample
+from agglomerative_clustering import AgglomerativeClustering
+from link import SingleLink
 
 
 def main(argv):
-    samps = []
-    for i in range(5):
-        samps.append(Sample(i, [i, i+8], 'hello '+str(i)))
-    my_samp = Sample(1, [1, 9], 'hello 1')
-    print(my_samp in samps)
+    data = Data('Leukemia_sample.csv')
+    sample_list = data.create_samples()
+    link = SingleLink()
+    m = AgglomerativeClustering(link, sample_list)
+    m.run(7)
 
 
 if __name__ == '__main__':
