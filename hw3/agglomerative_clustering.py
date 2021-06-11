@@ -47,24 +47,26 @@ class AgglomerativeClustering:
 
     def run(self, number_of_clusters):
         for i in range(0, 2):
-             meth = method[i]()
-             dis = meth.compute(self.clusters[0], self.clusters[1])
-             while len(self.clusters) > number_of_clusters:
-                most_close = [0, 0]
-                for cluster in self.clusters:
-                    for other in self.clusters:
-                        if cluster != other:
-                            new_dis = meth.compute(cluster, other)
+            meth = method[i]()
+            dis = meth.compute(self.clusters[0], self.clusters[1])
+            while len(self.clusters) > number_of_clusters:
+                merge_index = len(self.clusters) + 1
+                other_index = len(self.clusters) + 1
+                for k in range(len(self.clusters)):
+                    for j in range(len(self.clusters)):
+                        if k != j:
+                            new_dis = meth.compute(self.clusters[k], self.clusters[j])
                             if new_dis < dis:
                                 dis = new_dis
-                                most_close[0] = cluster
-                                most_close[1] = other
-                most_close[0].merge(most_close[1])
-        print('single link')
+                                merge_index = k
+                                other_index = j
+                if merge_index != len(self.clusters) + 1:
+                    self.clusters[merge_index].merge(self.clusters[other_index])
+
+        print("single link")
 
         for i in self.clusters:
-            print('Cluster ', i.c_id,': ',i.samples.s_id)
-
+           print("Cluster " + i.c_id + " :" + i.samples.s_id)
 
 
 

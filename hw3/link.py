@@ -7,7 +7,6 @@ class Link:
         self.data = Data('Leukemia_sample.csv')
         self.samples_list = self.data.create_samples()
         self.distances_matrix = Sample.compute_distances_matrix(self.samples_list)
-        print(self.distances_matrix)
 
     def compute(self, cluster, other):
         pass
