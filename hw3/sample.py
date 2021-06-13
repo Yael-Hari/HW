@@ -7,7 +7,6 @@ class Sample:
         self.genes = genes  # list
         self.lable = lable  # type
 
-
     def compute_euclidean_distance(self, other):
         sum = 0
         for i in range(len(self.genes)):
@@ -21,5 +20,5 @@ class Sample:
         for sample in samples_list:
             for other in samples_list:
                 distances_matrix[sample.s_id][other.s_id] = sample.compute_euclidean_distance(other)
-
+        print(distances_matrix)
         return distances_matrix

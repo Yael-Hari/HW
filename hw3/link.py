@@ -39,4 +39,4 @@ class CompleteLink(Link):
         return max(distances)
 
 
-method = [SingleLink, CompleteLink]
+methods_list = [SingleLink, CompleteLink]
