@@ -19,7 +19,7 @@ class Cluster:
         for other in self.samples:
             sum = 0
             if point != other:
-                for j in range(len(other.genes)):
+                for j in range(len(other.genes)):  # //////////////////////////////////////////////////////
                     sum += (point.genes[j] - other.genes[j])**2
             sum = sum**0.5
             if incluster:
