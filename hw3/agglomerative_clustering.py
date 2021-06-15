@@ -3,10 +3,10 @@ from link import *
 
 
 class AgglomerativeClustering:
-    def __init__(self, link, samples):
+    def __init__(self, link, samples, distances_matrix):
         self.link = link
         self.samples = samples
-
+        self.distances_matrix = distances_matrix
         self.clusters = []
 
         # every point gets a cluster
@@ -24,12 +24,11 @@ class AgglomerativeClustering:
                 find_min_out = []
                 for other in self.clusters:
                     if cluster != other:
-                        find_min_out.append(other.distance_to_point(point, False, self.link))
+                        find_min_out.append(other.distance_to_point(point, False, self.distances_matrix))
                 out_xi = (min(find_min_out))
-                in_xi = (cluster.distance_to_point(point, True, self.link))
+                in_xi = (cluster.distance_to_point(point, True, self.distances_matrix))
                 dict_sh[point.s_id] = 0
-                if (len(cluster.samples) > 1):
-                    # print("here", in_xi, out_xi)
+                if len(cluster.samples) > 1:
                     dict_sh[point.s_id] = (out_xi - in_xi) / max(in_xi, out_xi)
         return dict_sh
 
@@ -63,10 +62,10 @@ class AgglomerativeClustering:
         while len(self.clusters) > max_clusters:
             cluster1_index = 0
             cluster2_index = 1
-            distance = self.link.compute(self.clusters[0], self.clusters[1])
+            distance = self.link.compute(self.clusters[0], self.clusters[1], self.distances_matrix)
             for i in range(len(self.clusters)):
                 for j in range(i+1, len(self.clusters)):
-                    new_distance = self.link.compute(self.clusters[i], self.clusters[j])
+                    new_distance = self.link.compute(self.clusters[i], self.clusters[j], self.distances_matrix)
 
                     if new_distance < distance:
                         distance = new_distance
