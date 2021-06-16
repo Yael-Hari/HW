@@ -3,22 +3,15 @@ from sample import Sample
 
 
 class Link:
-    def __init__(self):
-        self.data = Data('Leukemia_sample.csv')
-        self.samples_list = self.data.create_samples()
-
     def compute(self, cluster, other, distances_matrix):
         pass
 
 
 class SingleLink(Link):
-    """
-    compute the distance between the two closest points in clusters.
-    """
-    def __init__(self):
-        super().__init__()
-
     def compute(self, cluster, other, distances_matrix):
+        """
+        compute the distance between the two closest points in clusters.
+        """
         distances = []
         for sample_i in cluster.samples:
             for sample_j in other.samples:
@@ -27,10 +20,10 @@ class SingleLink(Link):
 
 
 class CompleteLink(Link):
-    def __init__(self):
-        super().__init__()
-
     def compute(self, cluster, other, distances_matrix):
+        """
+        compute the distance between the two furthest points in clusters.
+        """
         distances = []
         for sample_i in cluster.samples:
             for sample_j in other.samples:

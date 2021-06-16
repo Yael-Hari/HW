@@ -15,6 +15,13 @@ class Cluster:
         self.samples = merged
 
     def distance_to_point(self, point, incluster, distances_matrix):
+        """
+        finds distance from cluster to point
+        :param point: sample
+        :param incluster: boolean
+        :param distances_matrix: 2D list
+        :return:
+        """
         distance = 0
         for other in self.samples:
             distance_to_point = distances_matrix[point.s_id][other.s_id]
@@ -26,19 +33,23 @@ class Cluster:
                 distance += (1 / len(self.samples)) * distance_to_point
         return distance
 
-    def find_dominant_lable(self, samples):
+    def find_dominant_lable(self):
+        """
+        find most dominant label in the cluster
+        :return: string: most dominant label
+        """
         dict = {}
-        for i in range(len(samples)):
-            if samples[i].lable not in dict.keys():
-                dict[samples[i].lable] = 0;
-            dict[samples[i].lable] += 1
+        for i in range(len(self.samples)):
+            if self.samples[i].lable not in dict.keys():
+                dict[self.samples[i].lable] = 0;
+            dict[self.samples[i].lable] += 1
         max_value = max(dict.values())
         return [k for k, v in dict.items() if v == max_value][0]
 
     def print_details(self, silhouette):
         list_of_samples_id = [sample.s_id for sample in self.samples]
         print("Cluster", str(self.c_id) + ":", list_of_samples_id, end="")
-        print(", dominant label =", self.find_dominant_lable(self.samples), end="")
+        print(", dominant label =", self.find_dominant_lable(), end="")
         print(", silhouette =", round(silhouette, 3))
 
 
